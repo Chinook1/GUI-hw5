@@ -1,0 +1,6 @@
+I didn't use the plugin, because the jQuery plugins cannot aid me in validation. I already perfected my validation using a combination of Regular Expressions and Javascript to catch incorrect inputs. I used Regular Expressions to ensure that the only possible inputs would be numbers, periods, and spaces, with additional rules to ensure periods could not be next to each other, like '..'. 
+
+In short, I have already achieved the desired validation without the jQuery plugin.
+
+I asked Professor Levkowitz about it, and he told me that if I had achieved the desired validation without needing the jQuery plugin, then I didn't need to use the plugin.
+

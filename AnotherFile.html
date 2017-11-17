@@ -1,0 +1,237 @@
+<!--
+        Name: John Kuczynski, John_Kuczynski@student.uml.edu, Student at UMass Lowell.
+        Class: COMP 4610-201, GUI Programming I.
+        File: /usr/cs/2019/jkuczyn1/public_html/461f2017/hw4/input110.html. The file is named input110.html, and it is in directory /usr/cs/2019/jkuczyn1/public_html/461f2017/hw4
+        This file was created on 5-Nov-2017.
+        Last updated by JK on 12-Nov-2017, 14:49.
+        Description: A program which accepts between 1 and 10 values in the price of the car field, and accepts any number of inputs greater than 1 in the Miles per gallon field. It then generates a field based on the inputs. There are a maximum of 10 columns, and an infinite maximum of rows. Needless to say, it is a Single Page Application.
+-->
+<!--Working on allowing different number of numbers for the first input field. Right now, Unfilled th fields show in the table as undefined, and td as null. The first input field can currently take between 1-10 inputs. Counting 1 & 10. -->
+<html ng-app="countryApp">
+  <head>
+
+	<!--<style>
+		table, th, td {border:1px solid black;}
+    table th,td:nth-child(1){background-color: yellow;}
+	</style>-->
+    <meta charset="utf-8">
+    <title>GUI Homework 4</title>
+      <link id="TRY" href="./css/style3.css" rel="stylesheet" type="text/css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    <script>
+    var ii = 1;
+      var countryApp = angular.module('countryApp', []);
+      countryApp.controller('CountryCtrl', function ($scope){
+        $scope.countries = [
+         /* {"1": 4, "2": 1359821000, "3": 1,"4": 2,"5": 3,"6": 4,"7": 5,"8": 6,"9": 7,"10": 8,"11": 9,"12": 10,"13": 11,"14": 12,"15": 13,"16": null},
+          {"1": 4, "2": 1205625000,"3": 11,"4": 12,"5": 13,"6": 14,"7": 15,"8": 16,"9": 17,"10": 18,"11": 19,"12": 110,"13": 111,"14": 112,"15": 113,"16": null},
+          {"1": 4,"2": 312247000, "3": 21,"4": 22,"5": 3,"6": 4,"7": 5,"8": 6,"9": 7,"10": 8,"11": 29,"12": 210,"13": 211,"14": 212,"15": 213,"16": null }
+        */];
+        $scope.h1 = "";
+        $scope.h2 = "";
+        $scope.h3 = "";
+        $scope.h4 = "";
+        $scope.h5 = "";
+        $scope.h6 = "";
+        $scope.h7 = "";
+        $scope.h8 = "";
+        $scope.h9 = "";
+        $scope.h10 = "";
+        
+//**************************************************
+        $scope.addName = function() {
+        var j;
+            //Part of making sure the $scope.countries is empty.
+            for(j = 0; j < $scope.countries.length+2; j++)
+            {
+            	$scope.countries.pop();
+            }
+            $scope.countries.pop();
+            //This bit is to make sure that $scope.countries is empty at the beginning of every round. Prevents duplicates.
+            var limit = 0;
+            while($scope.countries[0] != null && limit < 20)
+            {
+            	//alert("countries is not empty. $scope.countries[0] = " + $scope.countries[0]);
+                $scope.countries.pop();
+                limit++;
+            }
+            
+//*****************************************************
+        //Get the input, and parse it.
+
+				 if($scope.enteredName == undefined)
+         {
+         	alert("Invalid input in the first input field. I suspect that you entered nothing but spaces in the input box. That, or periods followed by spaces. Like this: . . . .");
+            return;
+         }
+
+				 if($scope.otherName == undefined)
+         {
+         	alert("Invalid input in the second input field. I suspect that you entered nothing but spaces in the input box. That, or periods followed by spaces. Like this: . . . .");
+            return;
+         }
+
+
+         var myInput = $scope.enteredName;
+         var res = myInput.split(" ");
+         var otherInput = $scope.otherName;
+         var res1 = otherInput.split(" ");
+         
+         //Get only the entered numbers.
+         var newArray = [];
+         var a;
+         for(a = 0; a < res.length; a++)
+         {
+          //Only get relevent input. Ignore stuff which is incorrect.
+         	if(res[a] != " " && res[a] != "" && res[a] != ".")
+            {
+            	newArray.push(res[a]);
+            }
+         }
+
+         //Send an error message if no valid number was entered into the first input field.
+         if(newArray.length < 1)
+         {
+         	alert("You have not entered any numbers in the first input field.");
+            return;
+         }
+         
+         var newArray1 = [];
+         var b;
+         for(b = 0; b < res1.length; b++)
+         {
+          //Only store valid input
+         	if(res1[b] != " " && res1[b] != "" && res1[b] != ".")
+            {
+            	newArray1.push(res1[b]);
+            }
+         }
+         
+         //If there is no valid input for the second input field, send an error message.
+         if(newArray1.length < 1)
+         {
+         	alert("You have not entered any valid numbers in the second input field.");
+            return;
+         }
+         
+          //In case there wasn't any valid input in either input field 1 or 2, and the problem somehow avoided the checks above, send error message.
+         if(newArray.length < 1 || newArray1.length < 1)
+         {
+         	alert("Sorry. You need to enter 1 valid number in each of the input fields.");
+            return;
+         }
+         
+         //Otherwise, if there is at least one valid number in each field:
+         else
+         {
+            //Set the column headers with their values.
+            $scope.h1 = ""+newArray[0];
+            $scope.h2 = ""+newArray[1];
+            $scope.h3 = ""+newArray[2];
+            $scope.h4 = ""+newArray[3];
+            $scope.h5 = ""+newArray[4];
+            $scope.h6 = ""+newArray[5];
+            $scope.h7 = ""+newArray[6];
+            $scope.h8 = ""+newArray[7];
+            $scope.h9 = ""+newArray[8];
+            $scope.h10 = ""+newArray[9];
+            
+            //For each row:
+            for(var c = 0; c < newArray1.length; c++)
+            {
+            	var abc;
+            	if(newArray1[c] != 0)
+                {
+                	abc = 1.0/(newArray1[c]/1.0);
+                }
+                else
+                {
+                	abc = 0;
+                }
+                var bcd = 15000*abc*2.58;
+                var sumArray = [];
+                var annoying = 0;
+		/*var annoying2 = 0*/
+                for(var z = 0; z < newArray.length; z++)
+                {
+			//The bit with adding .005 is to round to the closest hundreth, when I cut the variable below. In the .toFixed(2).
+                	annoying = parseFloat(newArray[z])+parseFloat(bcd)+parseFloat(.005);
+                  //Store the answer in sumArray.
+                  sumArray.push(annoying);
+                }
+
+                //This is the coded contents of each row.
+                var placeholder = parseFloat(c)+parseFloat(1);
+                $scope.countries.push({"1": newArray1[c], "2": "($" + (sumArray[0]/12).toFixed(2) + "/mo, $" + (sumArray[0]/15000).toFixed(2) + "/mi)" + placeholder + "1", "3": "($" + (sumArray[1]/12).toFixed(2) + "/mo, $" + (sumArray[1]/15000).toFixed(2) + "/mi)" + placeholder + "2", "4": "($" + (sumArray[2]/12).toFixed(2) + "/mo, $" + (sumArray[2]/15000).toFixed(2) + "/mi)" + placeholder + "3", "5": "($" + (sumArray[3]/12).toFixed(2) + "/mo, $" + (sumArray[3]/15000).toFixed(2) + "/mi)" + placeholder + "4", "6": "($" + (sumArray[4]/12).toFixed(2) + "/mo, $" + (sumArray[4]/15000).toFixed(2) + "/mi)" + placeholder + "5", "7": "($" + (sumArray[5]/12).toFixed(2) + "/mo, $" + (sumArray[5]/15000).toFixed(2) + "/mi)" + placeholder + "6", "8": "($" + (sumArray[6]/12).toFixed(2) + "/mo, $" + (sumArray[6]/15000).toFixed(2) + "/mi)" + placeholder + "7", "9": "($" + (sumArray[7]/12).toFixed(2) + "/mo, $" + (sumArray[7]/15000).toFixed(2) + "/mi)" + placeholder + "8", "10": "($" + (sumArray[8]/12).toFixed(2) + "/mo, $" + (sumArray[8]/15000).toFixed(2) + "/mi)" + placeholder + "9", "11": "($" + (sumArray[9]/12).toFixed(2) + "/mo, $" + (sumArray[9]/15000).toFixed(2) + "/mi)" + placeholder + "10", 
+                "12": "($" + (sumArray[10]/12).toFixed(2) + "/mo, $" + (sumArray[10]/15000).toFixed(2) + "/mi)" + placeholder + "11", 
+                "13": "($" + (sumArray[11]/12).toFixed(2) + "/mo, $" + (sumArray[11]/15000).toFixed(2) + "/mi)" + placeholder + "12"});
+
+            }
+            
+         }
+             
+
+        };
+        
+        
+        
+      });
+    </script>
+  </head>
+
+  <body ng-controller="CountryCtrl">
+    <div class="header">
+      <p>Because this assignment is designed to <br>1.  demonstrate working knowledge of Angular and SPA, rather than knowledge of math; <br>2. due to the shortage of time, and<br>3. Because the assignment only requires us to "Create a form that asks the user to enter price and mpg values",<br> I will be making assumptions concerning certain variables necessary to calculate the cost. The only variables which <b>you</b>, the user, are allowed to affect are the cost of the cars, and the fuel prices. All other variables are fixed.<br>Assumption #1: The cost will be for one year.<br>Assumption #2: the car will be driven 15000 miles in the year.<br>Assumption #3: There is no interest on the car.<br>Assumption #4: The cost of gas is a constant. In this case, it will be $2.58</p>
+      <p>My equation is this: [15000*(1/miles per gallon)*2.58]+PriceOfTheCar<br>That's the total cost. For per month, I divide the answer by 12; for per mile I divide the answer by 15000.</p>
+  	  <p>Greetings. You must enter between 1 and 10 valid numbers in the first input field. You can enter >= 1 numbers in the second input field. All numbers will show up for that one.</p>
+    </div>
+
+    
+    <div class="rest">
+      <form ng-submit="addName()"> <b>Price of the car: </b>
+        <br>
+	      <input type="text"  ng-model="enteredName" pattern="([0-9]*[.]?[0-9]*[\s])+" required title="Enter zero or more number. Then, enter zero or one decimal points. Then enter zero or more numbers. Finally, enter a space. If you wish to enter another number, follow the format again. Here is an example: for '123,1.2,.9', enter '123 1.2 .9 '. Don't enter any commas or dollar signs.">
+        <br>
+	      <b>Miles per gallon:</b>
+        <br>
+        <input type="text"  ng-model="otherName" pattern="([0-9]*[.]?[0-9]*[\s])+" required title="Enter zero or more number. Then, enter zero or one decimal points. Then enter zero or more numbers. Finally, enter a space. If you wish to enter another number, follow the format again. Here is an example: for '123,1.2,.9', enter '123 1.2 .9 '. Don't enter any commas or dollar signs.">
+        <br>
+        <input type="submit" value="submit">
+      </form>
+    </div>
+
+
+    <div class = "other">
+      <table>
+        <tr>
+          <th>Price/Fuel<br>consumption</th>
+          <th>{{h1}}</th>
+          <th>{{h2}}</th>
+          <th>{{h3}}</th>
+          <th>{{h4}}</th>
+          <th>{{h5}}</th>
+          <th>{{h6}}</th>
+          <th>{{h7}}</th>
+          <th>{{h8}}</th>
+          <th>{{h9}}</th>
+          <th>{{h10}}</th>
+        </tr>
+        <tr ng-repeat="country in countries">
+          <td>{{country.1}}</td>
+          <td>{{country.2}}</td>
+          <td>{{country.3}}</td>
+          <td>{{country.4}}</td>
+          <td>{{country.5}}</td>
+          <td>{{country.6}}</td>
+          <td>{{country.7}}</td>
+          <td>{{country.8}}</td>
+          <td>{{country.9}}</td>
+          <td>{{country.10}}</td>
+          <td>{{country.11}}</td>
+        </tr>
+      </table> 
+    </div>       
+
+    
+  </body>
+</html>

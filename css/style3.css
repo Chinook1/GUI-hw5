@@ -1,0 +1,19 @@
+/*
+        Name: John Kuczynski, John_Kuczynski@student.uml.edu, Student at UMass Lowell.
+        Class: COMP 4610-201, GUI Programming I.
+        File: /usr/cs/2019/jkuczyn1/public_html/461f2017/hw4/css/style3.css. The file is named style3.css, and it is in directory /usr/cs/2019/jkuczyn1/public_html/461f2017/hw4/css
+        This file was created on 11-Nov-2017.
+        Last updated by JK on 12-Nov-2017, 17:06.
+        Description: css file for the project..
+        Validators: I used the css validator from homework 3.
+*/
+
+table, th, td {border:1px solid black;}
+table th,td:nth-child(1){background-color: yellow;}
+
+div.header {position: relative;border: 1px solid black; width:100%; max-width:100%; background-color:silver; z-index:12;}
+
+
+div.rest{width:18%; max-width:18%;float:left; border: 2px solid black;}
+
+div.other{width:81%;max-width:81%;float:left;}
